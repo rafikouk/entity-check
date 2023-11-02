@@ -1,0 +1,79 @@
+class Member {
+    constructor(uniqueId, lastName, firstName, address, dob, gender) {
+        this.uniqueId = uniqueId;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.address = address;
+        this.dob = dob;
+        this.gender = gender;
+    }
+}
+
+class Coach {
+    constructor(lastName, firstName, age, specialty) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.age = age;
+        this.specialty = specialty;
+    }
+}
+
+class Session {
+    constructor(sport, schedule, maxCapacity) {
+        this.sport = sport;
+        this.schedule = schedule;
+        this.maxCapacity = maxCapacity;
+        this.members = [];
+    }
+
+    registerMember(member) {
+        if (this.members.length < this.maxCapacity) {
+            this.members.push(member);
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+class Gym {
+    constructor(name, address, phone) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.members = [];
+        this.coaches = [];
+        this.sessions = [];
+    }
+
+    addMember(member) {
+        this.members.push(member);
+    }
+
+    addCoach(coach) {
+        this.coaches.push(coach);
+    }
+
+    addSession(session) {
+        this.sessions.push(session);
+    }
+}
+
+// Example Usage
+const member1 = new Member(1, "Doe", "John", "123 Main St", "1990-01-01", "Male");
+const coach1 = new Coach("Smith", "Jane", 30, "Yoga");
+const session1 = new Session("Yoga", "Monday 5:00 PM", 20);
+
+const gym1 = new Gym("Gym Name", "123 Gym St", "555-555-5555");
+
+gym1.addMember(member1);
+gym1.addCoach(coach1);
+gym1.addSession(session1);
+
+const registered = session1.registerMember(member1);
+
+if (registered) {
+    console.log(`${member1.firstName} ${member1.lastName} registered for ${session1.sport} session on ${session1.schedule}.`);
+} else {
+    console.log(`${member1.firstName} ${member1.lastName} could not register for ${session1.sport} session. Session is full.`);
+}
